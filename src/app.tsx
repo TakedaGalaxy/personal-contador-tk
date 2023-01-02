@@ -1,7 +1,11 @@
 import * as ReactDOM from 'react-dom';
 
-function render() {
-  ReactDOM.render(<h2>Hello from React!</h2>, document.body);
+function App() {
+  return (
+    <section>
+      <h1>Hello</h1>
+    </section>
+  )
 }
 
-render();
+ReactDOM.render(<App />, document.getElementById("root"));
