@@ -1,27 +1,92 @@
 @import "../../temas/variaveis.scss";
 
 #BarraDeControle {
+  width: 100px;
   background-color: $cor-terciaria;
   transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  gap: 15px;
+
+  .botao {
+    position: relative;
+    border: solid $cor-principal 2px;
+    height: 64px;
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+
+    .containerIcone {
+      flex-shrink: 0;
+      background-color: $cor-principal;
+      height: 100%;
+      width: 64px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all .3s;
+
+      .icone {
+        transition: all .6s;
+        font-size: 24px;
+      }
+    }
+
+    .escrita {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 64px;
+      color: white;
+      line-height: 24px;
+      font-size: 20px;
+      text-align: center;
+    }
+  }
+
 }
 
 @media (min-width:991.98px) {
   #BarraDeControle {
-    width: 100px;
-    height: 100%;
     &:hover {
-      width: 250px;
+      width: 300px;
+
+      .botao {
+        .containerIcone {
+          .icone {
+            rotate: 180deg;
+            font-size: 34px;
+          }
+        }
+
+        &:hover {
+          //border-color: darken($cor-principal, 10);
+          border-color: white;
+
+          .containerIcone {
+            background-color: white;
+
+            .icone {
+              color: $cor-principal;
+              transition: all .1s;
+            }
+          }
+        }
+
+        &:active {
+          .containerIcone {
+            .icone {
+              font-size: 50px;
+              rotate: 200deg;
+            }
+          }
+        }
+      }
     }
   }
 }
 
 @media (max-width:991.98px) {
-  #BarraDeControle {
-    height: 100px;
-    width: 100%;
-
-    &:hover {
-      height: 250px;
-    }
-  }
+  #BarraDeControle {}
 }
