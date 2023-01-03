@@ -1,0 +1,27 @@
+@import "../../temas/variaveis.scss";
+
+#BarraDeControle {
+  background-color: $cor-terciaria;
+  transition: all 0.3s;
+}
+
+@media (min-width:991.98px) {
+  #BarraDeControle {
+    width: 100px;
+    height: 100%;
+    &:hover {
+      width: 250px;
+    }
+  }
+}
+
+@media (max-width:991.98px) {
+  #BarraDeControle {
+    height: 100px;
+    width: 100%;
+
+    &:hover {
+      height: 250px;
+    }
+  }
+}

@@ -1,10 +1,12 @@
-import { Link } from "react-router-dom";
+import { Container } from "react-bootstrap";
 import "./home.scss";
 
 export default function PaginaHome() {
   return (
     <div id="PaginaHome">
-      <h1>Pagina Home</h1>
+      <Container>
+        <h1>Pagina Home</h1>
+      </Container>
     </div>
   )
 }
