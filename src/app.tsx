@@ -1,11 +1,21 @@
-import * as ReactDOM from 'react-dom';
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import { HashRouter, Route, Routes } from 'react-router-dom';
+import PaginaHome from './paginas/home/home';
+
+const container = document.getElementById('app');
+
+const root = createRoot(container);
 
 function App() {
   return (
-    <section>
-      <h1>Hello</h1>
-    </section>
+    <React.StrictMode>
+      <HashRouter>
+        <Routes>
+          <Route path='/' element={<PaginaHome />} />
+        </Routes>
+      </HashRouter>
+    </React.StrictMode>
   )
 }
-
-ReactDOM.render(<App />, document.getElementById("root"));
+root.render(<App />);
