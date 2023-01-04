@@ -1,12 +1,10 @@
-import { Container } from "react-bootstrap";
-import "./home.scss";
+import "./home.scss"
+import ComponenteListagemContadorRegressivo from "../../componentes/listagem-contador-regressivo/listagem-contador-regressivo";
 
 export default function PaginaHome() {
   return (
     <div id="PaginaHome">
-      <Container>
-        <h1>Pagina Home</h1>
-      </Container>
+      <ComponenteListagemContadorRegressivo/>
     </div>
   )
 }
