@@ -1,5 +1,152 @@
 @import "../../temas/variaveis.scss";
 
+#Formulario {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.686);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  .container {
+    position: relative;
+    background-color: $cor-terciaria;
+    border-radius: 5px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+    .botaoFechar {
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 15px;
+      font-size: 18px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      background-color: $cor-principal;
+      width: 35px;
+      height: 35px;
+      transition: all .3s;
+
+      .icone {
+        color: white;
+      }
+
+      &:hover {
+        font-size: 24px;
+        background-color: white;
+
+        .icone {
+          color: $cor-principal;
+          transition: all 0.1s
+        }
+      }
+      &:active {
+        .icone {
+          rotate: 15deg;
+          font-size: 28px;
+        }
+      }
+    }
+
+    .containerInputs {
+
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      margin-bottom: 30px;
+
+      .input {
+        width: 100%;
+        height: 60px;
+        border-radius: 5px;
+        padding: 15px;
+        font-size: 18px;
+        box-shadow: none;
+        border: none;
+        outline: none;
+      }
+
+      .inputTitulo {
+        color: black;
+        height: 60px;
+      }
+    }
+
+    .containerSalvar {
+      display: flex;
+      justify-content: flex-end;
+
+      .botao {
+        position: relative;
+        color: white;
+        background-color: $cor-principal;
+        height: 60px;
+        width: 120px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .escrita {
+          transition: all .3s;
+          width: 100%;
+          text-align: center;
+          padding: 0;
+        }
+
+        .containerIcone {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 18px;
+          opacity: 0;
+          transition: all 0.3s cubic-bezier(0.64, -0.82, 0.49, 1.82);
+        }
+
+        &:hover {
+          background-color: white;
+
+          .escrita {
+            opacity: 0;
+          }
+
+          .containerIcone {
+            opacity: 1;
+            font-size: 34px;
+            color: $cor-principal;
+
+            .icone {
+              transition: all 0.1s
+            }
+          }
+        }
+
+        &:active {
+          .containerIcone {
+            .icone {
+              font-size: 38px;
+              rotate: 15deg;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 #BarraDeControle {
   width: 100px;
   background-color: $cor-terciaria;
