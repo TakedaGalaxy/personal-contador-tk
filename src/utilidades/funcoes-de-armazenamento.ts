@@ -92,6 +92,17 @@ export function deletarContadorProgressivos(index: number) {
 
 }
 
+export function restartContadorProgressivo(index:number){
+  
+  const listaAtual = getContadoresProgressivos();
+
+  listaAtual[index].data = new Date();
+  listaAtual[index].restarts++;
+
+  localStorage.setItem('contadoresProgressivos', JSON.stringify(listaAtual));
+
+}
+
 const armazenamento = {
   getContadoresRegressivos,
   addContadoresRegressivos,

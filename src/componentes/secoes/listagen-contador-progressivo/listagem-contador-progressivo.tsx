@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap"
 import { AiOutlineClose } from "react-icons/ai";
-import { getContadoresProgressivos, ContadorProgressivoType, deletarContadorProgressivos } from "../../../utilidades/funcoes-de-armazenamento";
+import { getContadoresProgressivos, ContadorProgressivoType, deletarContadorProgressivos, restartContadorProgressivo } from "../../../utilidades/funcoes-de-armazenamento";
 import { meses } from "../listagem-contador-regressivo/listagem-contador-regressivo";
 import "./listagem-contador-progressivo.scss"
 
@@ -10,16 +10,22 @@ export function CardContadorProgressivo(
     titulo,
     dataAtual,
     dataArmazenada,
-    aoDeletar
+    quantidadeResetares,
+    aoDeletar,
+    aoRestart
   }: {
     titulo: string,
     dataAtual: Date,
     dataArmazenada: Date,
+    quantidadeResetares:number,
     aoDeletar: () => void
+    aoRestart: () => void
   }
 ) {
 
-  const dias = (dataAtual.getTime() - dataArmazenada.getTime()) / 1000 / 60 / 60 / 24;
+  const conta = (dataAtual.getTime() - dataArmazenada.getTime()) / 1000 / 60 / 60 / 24;
+
+  const dias = conta < 0 ? 0 : conta;
   const horas = (dias - Math.floor(dias)) * 24;
   const minutos = (horas - Math.floor(horas)) * 60;
   const segundos = (minutos - Math.floor(minutos)) * 60;
@@ -60,8 +66,9 @@ export function CardContadorProgressivo(
         <Button
           className="botao"
           variant="btn"
+          onClick={()=>aoRestart()}
         >
-          Resetar
+          Resetar {quantidadeResetares}
         </Button>
       </div>
     </div>
@@ -100,9 +107,14 @@ export default function SecaoListagemContadorProgressivo() {
                 <CardContadorProgressivo
                   titulo={contador.titulo}
                   dataAtual={dataAtual}
+                  quantidadeResetares={contador.restarts}
                   dataArmazenada={new Date(contador.data)}
                   aoDeletar={() => {
                     deletarContadorProgressivos(index);
+                    setContadores(getContadoresProgressivos());
+                  }}
+                  aoRestart={() => {
+                    restartContadorProgressivo(index)
                     setContadores(getContadoresProgressivos());
                   }}
                 />

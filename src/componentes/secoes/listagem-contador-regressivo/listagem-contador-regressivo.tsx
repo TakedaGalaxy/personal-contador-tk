@@ -20,7 +20,9 @@ export function CardContadorRegressivo(
   }
 ) {
 
-  const dias = (dataMeta.getTime() - dataAtual.getTime()) / 1000 / 60 / 60 / 24;
+  const conta = (dataMeta.getTime() - dataAtual.getTime()) / 1000 / 60 / 60 / 24
+
+  const dias = conta < 0 ? 0 : conta;
   const horas = (dias - Math.floor(dias)) * 24;
   const minutos = (horas - Math.floor(horas)) * 60;
   const segundos = (minutos - Math.floor(minutos)) * 60;
