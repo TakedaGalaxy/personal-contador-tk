@@ -1,26 +1,25 @@
 import { useEffect, useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap"
 import { AiOutlineClose } from "react-icons/ai";
-import { ContadorRegressivoType, deletarContadorRegressivo, getContadoresRegressivos } from "../../../utilidades/funcoes-de-armazenamento";
-import "./listagem-contador-regressivo.scss";
+import { getContadoresProgressivos, ContadorProgressivoType, deletarContadorProgressivos } from "../../../utilidades/funcoes-de-armazenamento";
+import { meses } from "../listagem-contador-regressivo/listagem-contador-regressivo";
+import "./listagem-contador-progressivo.scss"
 
-export const meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
-
-export function CardContadorRegressivo(
+export function CardContadorProgressivo(
   {
     titulo,
     dataAtual,
-    dataMeta,
+    dataArmazenada,
     aoDeletar
   }: {
     titulo: string,
     dataAtual: Date,
-    dataMeta: Date,
+    dataArmazenada: Date,
     aoDeletar: () => void
   }
 ) {
 
-  const dias = (dataMeta.getTime() - dataAtual.getTime()) / 1000 / 60 / 60 / 24;
+  const dias = (dataAtual.getTime() - dataArmazenada.getTime()) / 1000 / 60 / 60 / 24;
   const horas = (dias - Math.floor(dias)) * 24;
   const minutos = (horas - Math.floor(horas)) * 60;
   const segundos = (minutos - Math.floor(minutos)) * 60;
@@ -55,35 +54,41 @@ export function CardContadorRegressivo(
         </div>
         <hr />
         <p className="dataMeta">
-          {`${dataMeta.getDate()} de ${meses[dataMeta.getMonth()]} as ` +
-            `${dataMeta.getHours()} : ${dataMeta.getMinutes()} : ${dataMeta.getSeconds()} (${dataMeta.getFullYear()})`}
+          {`${dataArmazenada.getDate()} de ${meses[dataArmazenada.getMonth()]} as ` +
+            `${dataArmazenada.getHours()} : ${dataArmazenada.getMinutes()} : ${dataArmazenada.getSeconds()} (${dataArmazenada.getFullYear()})`}
         </p>
+        <Button
+          className="botao"
+          variant="btn"
+        >
+          Resetar
+        </Button>
       </div>
     </div>
   )
 }
 
-export default function SecaoListagemContadorRegressivo() {
+export default function SecaoListagemContadorProgressivo() {
 
-  const [dataATual, setDataAtual] = useState<Date>(new Date())
-  const [contadores, setContadores] = useState<Array<ContadorRegressivoType>>(getContadoresRegressivos());
+  const [dataAtual, setDataAtual] = useState<Date>(new Date());
+  const [contadores, setContadores] = useState<Array<ContadorProgressivoType>>(getContadoresProgressivos());
 
   useEffect(() => {
 
     setInterval(() => {
+      setContadores(getContadoresProgressivos());
       setDataAtual(new Date());
-      setContadores(getContadoresRegressivos());
     }, 1000);
 
-  }, []);
+  }, [])
 
   return (
-    <section id="ListagemContadorRegressivo">
+    <section id="ListagemContadorProgressivo">
       <Container>
         <Row>
           <Col>
             <h1>
-              Contadores Regressivos
+              Contadores Progressivos
             </h1>
           </Col>
         </Row>
@@ -91,14 +96,14 @@ export default function SecaoListagemContadorRegressivo() {
         <Row>
           {contadores.map((contador, index) => {
             return (
-              <Col lg={6} key={index}>
-                <CardContadorRegressivo
+              <Col key={index} lg={6}>
+                <CardContadorProgressivo
                   titulo={contador.titulo}
-                  dataMeta={new Date(contador.data)}
-                  dataAtual={dataATual}
+                  dataAtual={dataAtual}
+                  dataArmazenada={new Date(contador.data)}
                   aoDeletar={() => {
-                    deletarContadorRegressivo(index);
-                    setContadores(getContadoresRegressivos());
+                    deletarContadorProgressivos(index);
+                    setContadores(getContadoresProgressivos());
                   }}
                 />
               </Col>

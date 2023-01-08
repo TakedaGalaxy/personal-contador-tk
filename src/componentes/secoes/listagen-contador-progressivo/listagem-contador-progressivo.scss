@@ -1,0 +1,68 @@
+@import "../../../temas/variaveis.scss";
+
+#ListagemContadorProgressivo{
+  .containerCardContador {
+    margin-bottom: 30px;
+    .cardContador {
+      border-radius: 5px;
+      background-color: $cor-terciaria;
+      padding: 15px;
+      transition: all .3s;
+
+      &:hover {
+        box-shadow: 0px 0px 10px $cor-principal;
+      }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+
+        .icone {
+          background-color: $cor-principal;
+          color: black;
+          font-size: 30px;
+          flex-shrink: 0;
+          border-radius: 5px;
+          transition: all 0.3s;
+          padding: 5px;
+
+          &:hover {
+            background-color: white;
+            color: $cor-principal;
+            padding: 0px;
+            transition: all 0.3s cubic-bezier(0.64, -0.82, 0.49, 1.82);
+          }
+
+          &:active {
+            rotate: 15deg;
+          }
+        }
+      }
+
+      .containerContadorTempo {
+        display: flex;
+        justify-content: space-between;
+
+        .containerContadorTempoEscrita {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          .numero {
+            font-size: 24px;
+            font-weight: bold;
+          }
+        }
+      }
+
+      .dataMeta{
+        font-size: 18px;
+      }
+      .botao{
+        width: 100%;
+        background-color: $cor-principal;
+        color: white;
+      }
+    }
+  }
+}
