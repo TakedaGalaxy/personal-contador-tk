@@ -48,24 +48,22 @@ function FormularioContadorRegressivo({
     const { data, tempo, titulo } = contadorRegressivo;
 
     const salvar = !!data && !!tempo && !!titulo;
-
+    
     if (!salvar) {
-
+      
       setContadorRegressivoErro({
         data: !!data,
         tempo: !!tempo,
         titulo: !!titulo
       });
-
+      
       return;
     }
-
-    const dataSemTempo = new Date(data);
-
-    const [ano, mes, dia] = [dataSemTempo.getFullYear(), dataSemTempo.getMonth(), dataSemTempo.getDate()];
+    
+    const [ano, mes, dia] = data.split('-').map(valor=>Number(valor));
     const [hora, minuto] = tempo.split(":").map(valor => Number(valor));
-
-    const dataParaSalvar = new Date(ano, mes, dia, hora, minuto);
+    
+    const dataParaSalvar = new Date(ano, mes-1, dia, hora, minuto);
 
     const resultado = addContadoresRegressivos({
       data: dataParaSalvar,

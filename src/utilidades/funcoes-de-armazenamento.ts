@@ -34,10 +34,21 @@ export function resetContadoresRegressivos() {
   localStorage.setItem('contadoresRegressivos', null);
 }
 
+export function deletarContadorRegressivo(index:number){
+  
+  const listaAtual = getContadoresRegressivos();
+
+  listaAtual.splice(index,1);
+
+  localStorage.setItem('contadoresRegressivos', JSON.stringify(listaAtual));
+
+}
+
 const armazenamento = {
   getContadoresRegressivos,
   addContadoresRegressivos,
-  resetContadoresRegressivos
+  resetContadoresRegressivos,
+  deletarContadorRegressivo
 }
 
 export default armazenamento;

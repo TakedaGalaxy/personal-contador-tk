@@ -1,19 +1,22 @@
 import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { AiOutlineClose } from "react-icons/ai";
+import { ContadorRegressivoType, deletarContadorRegressivo, getContadoresRegressivos } from "../../../utilidades/funcoes-de-armazenamento";
 import "./listagem-contador-regressivo.scss";
 
-const meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Septembro", "Outubro", "Novembro", "Dezembro"];
+const meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
 
 export function CardContadorRegressivo(
   {
     titulo,
     dataAtual,
-    dataMeta
+    dataMeta,
+    aoDeletar
   }: {
     titulo: string,
     dataAtual: Date,
-    dataMeta: Date
+    dataMeta: Date,
+    aoDeletar: () => void
   }
 ) {
 
@@ -29,7 +32,7 @@ export function CardContadorRegressivo(
           <h2>
             {titulo}
           </h2>
-          <AiOutlineClose className="icone" />
+          <AiOutlineClose className="icone" onClick={aoDeletar} />
         </div>
         <hr />
         <div className="containerContadorTempo">
@@ -63,12 +66,15 @@ export function CardContadorRegressivo(
 export default function ComponenteListagemContadorRegressivo() {
 
   const [dataATual, setDataAtual] = useState<Date>(new Date())
+  const [contadores, setContadores] = useState<Array<ContadorRegressivoType>>(getContadoresRegressivos());
 
   useEffect(() => {
 
     setInterval(() => {
       setDataAtual(new Date());
+      setContadores(getContadoresRegressivos());
     }, 1000);
+
 
   }, []);
 
@@ -84,13 +90,21 @@ export default function ComponenteListagemContadorRegressivo() {
           </Col>
         </Row>
         <Row>
-          <Col lg={6}>
-            <CardContadorRegressivo
-              titulo="Volta as aulas"
-              dataAtual={dataATual}
-              dataMeta={new Date(2023, 2, 2, 12, 0, 0)}
-            />
-          </Col>
+          {contadores.map((contador, index) => {
+            return (
+              <Col lg={6} key={index}>
+                <CardContadorRegressivo
+                  titulo={contador.titulo}
+                  dataMeta={new Date(contador.data)}
+                  dataAtual={dataATual}
+                  aoDeletar={() => {
+                    deletarContadorRegressivo(index);
+                    setContadores(getContadoresRegressivos());
+                  }}
+                />
+              </Col>
+            )
+          })}
         </Row>
       </Container>
     </section>
