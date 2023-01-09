@@ -1,8 +1,9 @@
 @import "../../../temas/variaveis.scss";
 
-#ListagemContadorProgressivo{
+#ListagemContadorProgressivo {
   .containerCardContador {
     margin-bottom: 30px;
+
     .cardContador {
       border-radius: 5px;
       background-color: $cor-terciaria;
@@ -55,13 +56,70 @@
         }
       }
 
-      .dataMeta{
+      .dataMeta {
         font-size: 18px;
       }
-      .botao{
+
+      .botao {
         width: 100%;
         background-color: $cor-principal;
         color: white;
+        height: 60px;
+        transition: all .3s;
+        position: relative;
+        box-shadow: none;
+        border: none;
+
+        .escrita {
+          display: inline-block;
+          width: 100%;
+        }
+
+        .containerIcone {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          .icone {
+            visibility: hidden;
+            transition: rotate .3s;
+            font-size: 40px;
+            rotate: -45deg;
+          }
+        }
+
+        &:hover {
+          background-color: white;
+          color: $cor-principal;
+
+          .escrita {
+            display: none;
+          }
+
+          .containerIcone {
+            .icone {
+              visibility: visible;
+              font-size: 40px;
+              rotate: 0deg;
+            }
+          }
+        }
+
+        &:active{
+          .containerIcone {
+            .icone {
+              visibility: visible;
+              font-size: 40px;
+              rotate: 180deg;
+            }
+          }
+        }
+
+
       }
     }
   }
