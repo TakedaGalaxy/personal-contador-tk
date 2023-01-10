@@ -38,5 +38,5 @@ export const rules: Required<ModuleOptions>['rules'] = [
       // Compiles Sass to CSS
       "sass-loader",
     ],
-  },
+  }
 ];

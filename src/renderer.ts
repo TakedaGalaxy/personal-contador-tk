@@ -29,5 +29,3 @@
 import './index.scss';
 import './app';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-console.log('👋 This message is being logged by "renderer.js", included via webpack');
