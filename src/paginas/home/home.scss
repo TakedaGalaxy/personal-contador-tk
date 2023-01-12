@@ -1,8 +1,21 @@
 @import "../../temas/variaveis.scss";
 
-#PaginaHome{
+#PaginaHome {
   background-color: $cor-secundaria;
   width: 100%;
   color: white;
   overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $cor-terciaria;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $cor-principal;
+    border-radius: 20px;
+  }
 }
