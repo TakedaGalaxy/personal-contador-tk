@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { AiOutlineClose } from "react-icons/ai";
+import SubComponenteNaoCadastrado from "../../../componentes/sub-componentes/nao-cadastrado/nao-cadastrado";
 import { ContadorRegressivoType, deletarContadorRegressivo, getContadoresRegressivos } from "../../../utilidades/funcoes-de-armazenamento";
 import "./listagem-contador-regressivo.scss";
 
@@ -106,6 +107,11 @@ export default function SecaoListagemContadorRegressivo() {
               </Col>
             )
           })}
+          {!contadores.length &&
+            <Col>
+              <SubComponenteNaoCadastrado />
+            </Col>
+          }
         </Row>
       </Container>
     </section>

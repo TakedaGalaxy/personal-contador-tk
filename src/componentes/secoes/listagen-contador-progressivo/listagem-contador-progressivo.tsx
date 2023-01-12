@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap"
 import { AiOutlineClose, AiOutlineSync } from "react-icons/ai";
+import SubComponenteNaoCadastrado from "../../../componentes/sub-componentes/nao-cadastrado/nao-cadastrado";
 import { getContadoresProgressivos, ContadorProgressivoType, deletarContadorProgressivos, restartContadorProgressivo } from "../../../utilidades/funcoes-de-armazenamento";
 import { meses } from "../listagem-contador-regressivo/listagem-contador-regressivo";
 import "./listagem-contador-progressivo.scss"
@@ -129,6 +130,11 @@ export default function SecaoListagemContadorProgressivo() {
               </Col>
             )
           })}
+          {!contadores.length &&
+            <Col>
+              <SubComponenteNaoCadastrado />
+            </Col>
+          }
         </Row>
       </Container>
     </section>
