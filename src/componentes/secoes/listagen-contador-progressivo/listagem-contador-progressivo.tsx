@@ -110,7 +110,7 @@ export default function SecaoListagemContadorProgressivo() {
         </Row>
         <hr />
         <Row>
-          {contadores.map((contador, index) => {
+          {contadores?.map((contador, index) => {
             return (
               <Col key={index} lg={6}>
                 <CardContadorProgressivo
@@ -130,7 +130,7 @@ export default function SecaoListagemContadorProgressivo() {
               </Col>
             )
           })}
-          {!contadores.length &&
+          {!contadores?.length &&
             <Col>
               <SubComponenteNaoCadastrado />
             </Col>
